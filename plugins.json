@@ -1,0 +1,50 @@
+{
+  "site_base_url": "https://kusumotok.github.io/plugins",
+  "all_site_dir": "all",
+  "plugins": [
+    {
+      "name": "Maxima Based Segmenter",
+      "repo": "https://github.com/kusumotok/Fiji-Segmentation-Suite.git",
+      "ref": "main",
+      "site_dir": "maxima-based-segmenter",
+      "build": "mvn -B -DskipTests package",
+      "build_dir": "plugin",
+      "jar_glob": "plugin/target/Fiji_Segmentation_Suite.jar"
+    },
+    {
+      "name": "Combine 5D",
+      "repo": "https://github.com/kusumotok/combine.git",
+      "ref": "master",
+      "site_dir": "combine-5d",
+      "build": "mvn -B -DskipTests package",
+      "jar_glob": "target/Combine_5D.jar"
+    },
+    {
+      "name": "Channel Stack B&C",
+      "repo": "https://github.com/kusumotok/channel-stack-brightness-contrast.git",
+      "ref": "main",
+      "site_dir": "channel-stack-bc",
+      "build": "mvn -B -DskipTests package",
+      "jar_glob": "target/channel-stack-brightness-contrast.jar"
+    },
+    {
+      "name": "ROI Explorer",
+      "repo": "https://github.com/kusumotok/ROI_Explorer_Fiji.git",
+      "ref": "master",
+      "site_dir": "roi-explorer",
+      "build": "mvn -B -DskipTests install",
+      "jar_glob": "target/ROI_Explorer_Fiji.jar"
+    },
+    {
+      "name": "Spot Quantifier Workflow",
+      "repo": "https://github.com/kusumotok/Spot_Quantifier_Workflow.git",
+      "ref": "master",
+      "site_dir": "spot-quantifier-workflow",
+      "build": "mvn -B -DskipTests package",
+      "jar_glob": "target/Spot_Quantifier_Workflow.jar",
+      "dependencies": [
+        "plugins/ROI_Explorer_Fiji.jar"
+      ]
+    }
+  ]
+}
