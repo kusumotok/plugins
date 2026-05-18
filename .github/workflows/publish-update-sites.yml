@@ -1,0 +1,53 @@
+name: Publish Fiji Update Sites
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 18 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - plugins.json
+      - scripts/build_update_sites.py
+      - .github/workflows/publish-update-sites.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update-site repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "8"
+          cache: maven
+
+      - name: Build update sites
+        env:
+          SOURCE_REPO_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN }}
+        run: python3 scripts/build_update_sites.py --config plugins.json --work-dir _work --dist public
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
