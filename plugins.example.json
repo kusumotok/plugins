@@ -1,0 +1,20 @@
+{
+  "site_base_url": "https://OWNER.github.io/REPOSITORY",
+  "all_site_dir": "all",
+  "plugins": [
+    {
+      "name": "Area Segmentater Small",
+      "repo": "https://github.com/OWNER/Area_Segmentater_small.git",
+      "ref": "main",
+      "site_dir": "area-segmentater-small",
+      "build": "mvn -B -DskipTests package",
+      "build_dir": ".",
+      "jar_glob": "target/*.jar",
+      "exclude_jars": [
+        "*-sources.jar",
+        "*-javadoc.jar",
+        "*-tests.jar"
+      ]
+    }
+  ]
+}
