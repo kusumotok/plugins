@@ -1,0 +1,4 @@
+_work/
+public/
+*.pyc
+__pycache__/
